@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const dns = require('dns');
 const urlParser = require('url');
 const cors = require('cors');
-const Url = require('./models/url'); // Adjust path if needed
+const Url = require('./url'); // Adjust path if needed
 
 const app = express();
 const port = process.env.PORT || 3000;

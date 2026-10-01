@@ -3,8 +3,9 @@
     "start": "node myApp.js"
   },
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^18.0.5",
     "express": "^5.2.1",
-    "mongoose": "^5.11.15"
+    "mongoose": "^5.13.23"
   }
 }
