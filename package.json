@@ -1,14 +1,16 @@
 {
+  "name": "fcc-backend-challenges",
+  "version": "1.0.0",
+  "description": "Back-End Development and APIs certification projects",
+  "main": "server.js",
   "scripts": {
-    "start": "node myApp.js"
-  {
+    "start": "node server.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.15",
     "multer": "^1.4.5-lts.1"
-  }
-}
   }
 }
