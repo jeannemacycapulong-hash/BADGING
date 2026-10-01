@@ -21,7 +21,6 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model('Person', personSchema);
 
-
 app.get('/', (req, res) => {
   res.send('Model Challenge Ready');
 });
@@ -30,4 +29,7 @@ app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
 
-module.exports = mongoose;
+module.exports = {
+  mongoose: mongoose,
+  Person: Person
+};
