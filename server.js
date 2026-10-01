@@ -11,7 +11,11 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => console.log("MongoDB connected successfully"))
+  .catch(err => console.error("MongoDB connection error:", err));
 
 app.post('/api/users', async (req, res) => {
   try {
@@ -22,7 +26,7 @@ app.post('/api/users', async (req, res) => {
       _id: savedUser._id
     });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Error creating user' });
   }
 });
 
@@ -31,7 +35,7 @@ app.get('/api/users', async (req, res) => {
     const users = await User.find({}, 'username _id');
     res.json(users);
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Error fetching users' });
   }
 });
 
@@ -47,7 +51,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
 
     const exerciseDate = date ? new Date(date) : new Date();
     if (isNaN(exerciseDate.getTime())) {
-      return res.json({ error: 'Invalid date' });
+      return res.json({ error: 'Invalid Date' });
     }
 
     const newExercise = new Exercise({
@@ -67,7 +71,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
       _id: user._id
     });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error adding exercise' });
   }
 });
 
@@ -108,7 +112,7 @@ app.get('/api/users/:_id/logs', async (req, res) => {
       log: log
     });
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    res.status(500).json({ error: 'Server error fetching logs' });
   }
 });
 
