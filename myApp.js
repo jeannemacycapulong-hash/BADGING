@@ -1,9 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Enable CORS so FreeCodeCamp's test runner can query your API without being blocked
+app.use(cors());
 
 // Connect to MongoDB Atlas
 mongoose.connect(process.env.MONGO_URI, {
@@ -11,7 +15,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true
 });
 
-// Basic route so the test runner gets a valid response when visiting the URL
+// Basic route to verify server is running
 app.get('/', (req, res) => {
   res.send('Database Connected Successfully');
 });
@@ -20,5 +24,5 @@ app.listen(port, () => {
   console.log(`App running on port ${port}`);
 });
 
-// Mandatory export for freeCodeCamp's automated tests
+// Mandatory export for FreeCodeCamp's automated tests
 module.exports = mongoose;
